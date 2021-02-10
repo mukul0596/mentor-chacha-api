@@ -7,11 +7,11 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
-        min: 10,
-        max: 10
+        minlength: 10,
+        maxlength: 10
     },
     password: {
         type: String,
@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     email: String,
     coachingName: String,
     class: {
-        type: Number,
+        type: String,
         required: true
     },
     age: Number,
@@ -39,7 +39,7 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.method.comparePassword = function(passport, cb) {
+UserSchema.methods.comparePassword = function(password, cb) {
     bcrypt.compare(password, this.password, (err, isMatch) => {
         if (err)
             return cb(err);
@@ -54,14 +54,15 @@ UserSchema.method.comparePassword = function(passport, cb) {
 const User = mongoose.model('User', UserSchema);
 
 // const User1 = new User({
-//     name: 'Test'
-//     phone: 9876543210
-//     email: 'test@test.com'
-//     coachingName: 'Test Coaching'
-//     class: 11
-//     age: 16
-//     gender: 'Male'
-//     category: 'General'
+//     name: 'Test',
+//     phone: '9876543210',
+//     password: '12345',
+//     email: 'test@test.com',
+//     coachingName: 'Test Coaching',
+//     class: '11',
+//     age: 16,
+//     gender: 'Male',
+//     category: 'General',
 // });
 // User1.save();
 

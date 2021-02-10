@@ -19,7 +19,11 @@ userRouter.post('/login', passport.authenticate('local', {session: false}),async
 
 userRouter.get('/logout', passport.authenticate('jwt', {session: false}),async (req, res, next) => {
     res.clearCookie('access_token');
-    res.json({success: true, user: {}})
+    res.json({success: true, user: {}});
+});
+
+userRouter.get('/authenticated', passport.authenticate('jwt', {session: false}),async (req, res, next) => {
+    res.status(200).json({ isAuthenticated: true, user: req.user });
 });
 
 module.exports = userRouter;

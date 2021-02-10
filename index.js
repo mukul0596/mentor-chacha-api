@@ -4,11 +4,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001',
+  credentials: true
+}));
 app.use(compression());
-app.use(helmet())
+app.use(helmet());
 
 require('dotenv').config();
 
@@ -25,6 +29,7 @@ mongoose.connection.on('error', err => {
 
 const urls = require('./urls');
 app.use(bodyParser.json());
+app.use(cookieParser());
 urls(app);
 
 const PORT = process.env.PORT || 5000;
