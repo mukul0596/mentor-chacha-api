@@ -29,7 +29,7 @@ passport.use(new LocalStrategy({ usernameField: 'phone' }, (phone, password, don
         if (err)
             return done(err);
         if (!user)
-            return(false, null);
+            return done(null, false);
         user.comparePassword(password, done);
     })
 }));

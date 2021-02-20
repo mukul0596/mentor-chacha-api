@@ -21,11 +21,18 @@ const UserSchema = new mongoose.Schema({
     coachingName: String,
     class: {
         type: String,
-        required: true
+        required: true,
+        enum: ['11', '12', '13']
     },
     age: Number,
-    gender: String,
-    category: String
+    gender: {
+        type: String,
+        enum: ['Male', 'Female']
+    },
+    category: {
+        type: String,
+        enum: ['General', 'OBC', 'SC', 'ST']
+    }
 });
 
 UserSchema.pre('save', function(next) {
@@ -54,10 +61,10 @@ UserSchema.methods.comparePassword = function(password, cb) {
 const User = mongoose.model('User', UserSchema);
 
 // const User1 = new User({
-//     name: 'Test',
-//     phone: '9876543210',
+//     name: 'Tarun Randi',
+//     phone: '1234567890',
 //     password: '12345',
-//     email: 'test@test.com',
+//     email: 'tarun@randi.com',
 //     coachingName: 'Test Coaching',
 //     class: '11',
 //     age: 16,
