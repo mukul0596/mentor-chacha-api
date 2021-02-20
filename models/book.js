@@ -6,20 +6,37 @@ const BookSchema = new mongoose.Schema({
         required: true
     },
     description: String,
-    subject: {
+    writter: {
         type: String,
         required: true
     },
-    for: String,
-    imageUrl: String
+    publication: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+        required: true,
+        enum: ['Physics', 'Chemistry', 'Maths', 'Biology']
+    },
+    for: {
+        type: String,
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    }
 });
 
 const Book = mongoose.model('Book', BookSchema);
 
 // const Book1 = new Book({
-//     title: 'IE Irodov',
-//     description: 'Best book for jEE Advanced',
-//     subject: 'Physics',
+//     title: 'Advanced Problems in Mathematics',
+//     description: 'Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced. Best book for jEE Advanced.',
+//     writter: 'Vikash Gupta and P. Joshi',
+//     publication: 'Balajji',
+//     subject: 'Maths',
 //     for: 'Advanced',
 //     imageUrl: 'irodov.png'
 // });

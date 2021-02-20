@@ -8,9 +8,17 @@ const bookRouter = express.Router();
 bookRouter.use(bodyParser.json());
 
 
-bookRouter.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
-    const books = await Book.find({ });
-    res.send(books);
+bookRouter.get('/',  async (req, res, next) => {
+    const phyBooks = await Book.find({ subject: 'Physics' });
+    const chemBooks = await Book.find({ subject: 'Chemistry' });
+    const mathBooks = await Book.find({ subject: 'Maths' });
+    const bioBooks = await Book.find({ subject: 'Biology' });
+    res.send({
+        Physics: phyBooks,
+        Chemistry: chemBooks,
+        Maths: mathBooks,
+        Biology: bioBooks
+    });
 });
 
 module.exports = bookRouter;
