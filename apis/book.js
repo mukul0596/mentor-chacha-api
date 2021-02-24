@@ -8,7 +8,7 @@ const bookRouter = express.Router();
 bookRouter.use(bodyParser.json());
 
 
-bookRouter.get('/',  async (req, res, next) => {
+bookRouter.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
     const phyBooks = await Book.find({ subject: 'Physics' });
     const chemBooks = await Book.find({ subject: 'Chemistry' });
     const mathBooks = await Book.find({ subject: 'Maths' });

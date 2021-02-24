@@ -18,7 +18,10 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     email: String,
-    coachingName: String,
+    instituteId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Institute'
+    },
     class: {
         type: String,
         required: true,

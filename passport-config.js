@@ -33,3 +33,24 @@ passport.use(new LocalStrategy({ usernameField: 'phone' }, (phone, password, don
         user.comparePassword(password, done);
     })
 }));
+
+
+
+passport.use('admin-jwt', new JwtStrategy({
+    jwtFromRequest: cookieExtractor,
+    secretOrKey: process.env.PASSPORT_JWT_SECRET
+}, (payload, done) => {
+    if (payload.username == process.env.ADMIN_USERNAME) {
+        return done(null, true);
+    }
+
+    return done(null, false);
+}));
+
+passport.use('admin-local', new LocalStrategy({ usernameField: 'username' }, (username, password, done) => {
+    if (username == process.env.ADMIN_USERNAME && password == process.env.ADMIN_PASSWORD) {
+        return done(null, true);
+    }
+
+    return done(null, false);
+}));
