@@ -5,7 +5,6 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: String,
     writter: {
         type: String,
         required: true
@@ -23,7 +22,8 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: String
+    image: String,
+    description: String
 });
 
 const Book = mongoose.model('Book', BookSchema);

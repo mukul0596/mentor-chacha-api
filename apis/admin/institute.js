@@ -14,7 +14,7 @@ instituteRouter.get('/', passport.authenticate('admin-jwt', {session: false}), a
 });
 
 instituteRouter.get('/:id', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
-    const institute = await Institute.findById(req.params.id);
+    const institute = await Institute.findById(req.params.id, {__v: 0, _id: 0});
     res.send(institute);
 });
 

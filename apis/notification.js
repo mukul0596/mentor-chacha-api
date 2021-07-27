@@ -14,8 +14,12 @@ notificationRouter.get('/titles', passport.authenticate('jwt', {session: false})
 });
 
 notificationRouter.get('/:id', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
-    const notification = await Notification.findById(req.params.id);
-    res.send(notification);
+    Notification.findByIdAndUpdate(req.params.id, {$push: {readBy: req.user._id}})
+    .then((notification) => {
+        res.send(notification);
+    }).catch((err) => {
+        res.send(err);
+    })
 });
 
 module.exports = notificationRouter;

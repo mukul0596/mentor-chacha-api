@@ -8,13 +8,18 @@ const notificationRouter = express.Router();
 notificationRouter.use(bodyParser.json());
 
 
-notificationRouter.get('/titles', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
-    const notifications = await Notification.find({ instituteId: {$in: [null, req.user.instituteId]} }, {description: 0}).sort({ createdAt: 'desc'}).exec();
+notificationRouter.get('/general/titles', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
+    const notifications = await Notification.find({ instituteId: null }, {description: 0}).sort({ createdAt: 'desc'}).exec();
+    res.send(notifications);
+});
+
+notificationRouter.get('/:instituteId/titles', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
+    const notifications = await Notification.find({ instituteId: req.params.instituteId }, {description: 0}).sort({ createdAt: 'desc'}).exec();
     res.send(notifications);
 });
 
 notificationRouter.get('/:id', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
-    const notification = await Notification.findById(req.params.id);
+    const notification = await Notification.findById(req.params.id, {__v: 0, readBy: 0, createdAt: 0, updatedAt: 0, instituteId: 0, _id: 0});
     res.send(notification);
 });
 

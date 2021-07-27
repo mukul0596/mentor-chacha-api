@@ -15,8 +15,8 @@ const InstituteSchema = new mongoose.Schema({
     city: String,
 });
 
-InstituteSchema.virtual('students', {
-    ref: 'Student',
+InstituteSchema.virtual('users', {
+    ref: 'User',
     localField: '_id',
     foreignField: 'instituteId'
 });
@@ -31,8 +31,8 @@ InstituteSchema.virtual('notifications', {
 const Institute = mongoose.model('Institute', InstituteSchema);
 
 // const Institute1 = new Institute({
-//     name: 'Test Institute',
-//     phone: '9876543210',
+//     name: 'Test Institute 2',
+//     phone: '9876543211',
 //     email: 'test@test.com',
 //     city: 'TestCity'
 // });

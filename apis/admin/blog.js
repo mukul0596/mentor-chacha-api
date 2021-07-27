@@ -14,7 +14,7 @@ blogRouter.get('/titles', passport.authenticate('admin-jwt', {session: false}), 
 });
 
 blogRouter.get('/:id', passport.authenticate('admin-jwt', {session: false}), async (req, res, next) => {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findById(req.params.id, {__v: 0, _id: 0});
     res.send(blog);
 });
 

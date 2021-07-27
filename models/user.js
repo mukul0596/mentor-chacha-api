@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         enum: ['11', '12', '13']
     },
+    stream: {
+        type: String,
+        enum: ['PCM', 'PCB'],
+        default: 'PCM'
+    },
     age: Number,
     gender: {
         type: String,
@@ -64,15 +69,15 @@ UserSchema.methods.comparePassword = function(password, cb) {
 const User = mongoose.model('User', UserSchema);
 
 // const User1 = new User({
-//     name: 'Tarun Randi',
-//     phone: '1234567890',
+//     name: 'Mukul Gupta',
+//     phone: '9415286648',
 //     password: '12345',
-//     email: 'tarun@randi.com',
-//     coachingName: 'Test Coaching',
+//     email: 'mk.mukul0596@gmail.com',
 //     class: '11',
 //     age: 16,
 //     gender: 'Male',
 //     category: 'General',
+//     instituteId: '60352910096a2b84d94f189d'
 // });
 // User1.save();
 

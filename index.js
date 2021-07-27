@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 urls(app);
 
-app.use(express.static('files/images'))
+app.use(express.static('files'))
 
 const PORT = process.env.PORT || 5000;
 
